@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <math.h>
+using namespace std;
+
+// 다각형의 면적 : CCW를 사용하여 다각형의 면적을 구하는 문제
+// 음수를 고려, 나온 값을 절대값으로 만들어 주는게 핵심
+
+double CCW(double x1, double x2, double x3, double y1, double y2, double y3)
+{
+	double d = x1 * y2 + x2 * y3 + x3 * y1;
+	d -= y1 * x2 + y2 * x3 + y3 * x1;
+	return d / 2;
+}
+int main(void)
+{
+	int n;
+	double ans = 0;
+	cin >> n;
+	vector<pair<double, double>> vec(n);
+
+	for (int i = 0; i < n; i++)
+	{
+		cin >> vec[i].first >> vec[i].second;
+	}
+	for (int i = 1; i < n; i++)
+	{
+		ans += CCW(vec[0].first, vec[i - 1].first, vec[i].first, vec[0].second, vec[i - 1].second, vec[i].second);
+	}
+	
+	cout.precision(1);
+	cout << fixed;
+	cout << abs(ans);
+}
