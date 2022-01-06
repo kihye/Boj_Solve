@@ -4,6 +4,7 @@
 #include <queue>
 using namespace std;
 
+// Mootube : 각 노드끼리의 길이를 지정, 조건에 만족하는 탐색된 노드의 갯수를 출력하는 문제
 // 선택한 동영상(Node)에서 각 동영상에 연결된 라인 USADO의 크기가 K보다 크거나 같다는
 // 조건을 만족하는 동영상만을 추천시켜준다는 조건을 이용, BFS 사용
 void InitCheck(bool check[])
