@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <map>
+using namespace std;
+
+// 좌표 압축 : 각 값에 0부터 시작하는 좌표값을 배정하는 문제
+// 배열 s로 중복이 제거되고 정렬된 배열을 만든 후, map 자료구조를 통해 해당하는 key값에 순차적으로 value 지정 
+// 기존에 저장해둔 값이 있는 x를 key로 지정, find를 통해 value를 출력한다.
+
+int main(void)
+{
+	int n, count = 0;
+	vector<int> x, s;
+	map<int, int> m;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		int num;
+		cin >> num;
+		x.push_back(num);
+		s.push_back(num);
+	}
+	sort(s.begin(), s.end());
+	s.erase(unique(s.begin(), s.end()),s.end());
+	for (auto it = s.begin(); it != s.end(); it++)
+	{
+		m.insert({ *it, count });
+		count++;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		cout << m.find(x[i])->second << " ";
+	}
+}
