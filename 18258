@@ -1,0 +1,58 @@
+#include <iostream>
+#include <queue>
+#include <string>
+using namespace std;
+
+// 큐2 : 문제에 나온 대로 입력을 구현하면 된다.
+// 시간제한이 1초라는 특징이 있으므로 구현보다는 언어에 맞게 최대한 입출력에서 시간을 줄이는 방법을 알아야 하는 문제
+int main(void)
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	int n;
+	queue<int> q;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		string str;
+		cin >> str;
+		if (str == "push")
+		{
+			int num;
+			cin >> num;
+			q.push(num);
+		}
+		else if(str == "pop")
+		{
+			if (q.empty())
+				cout << "-1" << "\n";
+			else
+			{
+				cout << q.front() << "\n";
+				q.pop();
+			}
+		}
+		else if (str == "size")
+		{
+			cout << q.size() << "\n";
+		}
+		else if (str == "empty")
+		{
+			cout << q.empty() << "\n";
+		}
+		else if (str == "front")
+		{
+			if (q.empty())
+				cout << "-1" << "\n";
+			else
+				cout << q.front() << "\n";
+		}
+		else if(str == "back")
+		{
+			if (q.empty())
+				cout << "-1" << "\n";
+			else
+				cout << q.back() << "\n";
+		}
+	}
+}
