@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 팰린드롬수 : 입력한 값이 팰린드롬수인지를 확인하는 것을 구현하는 문제
+// 이 문제에서 무의미한 0이 앞에 오지 않으므로 그것을 고려하지 않고 풀 수 있어 상당히 쉽다.
+// 단순히 문자열의 앞뒤만 한칸씩 옮겨가며 같이 비교하면 된다.
+
+int main(void)
+{
+	string str;
+	while (true)
+	{
+		cin >> str;
+		if (str == "0")
+			break;
+		else
+		{
+			bool check = true;
+			for (int i = 0; i < str.length() / 2; i++)
+			{
+				if (str[i] != str[str.length() - 1 - i])
+				{
+					check = false;
+					break;
+				}
+			}
+			if (check)
+				cout << "yes" << endl;
+			else
+				cout << "no" << endl;
+		}
+	}
+}
