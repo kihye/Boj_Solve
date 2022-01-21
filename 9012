@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+// 괄호 : VPS 검사를 구현하는 문제
+// 스택을 활용하여 효율성 있게 구현해야 한다.
+// 여는 괄호일 경우에만 스택에 넣어주고, 닫는 괄호일 땐 여는 괄호가 있을 때만 pop.
+// 닫는 괄호에서 스택이 비어있는지도 검사해준다.
+// 최종적으로 스택이 비어있다면 YES, 그렇지 않다면 NO를 출력해줬다.
+
+int main(void)
+{
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		bool check = true;
+		string str;
+		stack<char> s;
+		cin >> str;
+		for (int j = 0; j < str.length(); j++)
+		{
+			if (str[j] == '(')
+				s.push(str[j]);
+			else
+			{
+				if (!s.empty()) s.pop();
+				else check = false;
+			}
+		}
+		if (!s.empty()) check = false;
+		if (check) cout << "YES" << endl;
+		else cout << "NO" << endl;
+	}
+}
