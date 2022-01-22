@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+
+typedef long long ll;
+using namespace std;
+const int M = 1234567891;
+
+// Hashing : 해시 함수를 구현하는 문제
+// 100점은 비교적 수가 크므로 이를 조정하기 위해 pow를 통해 제곱한 값을 곱해주기 보다 직접 31을 제곱하는 것을 구현하는 방식을 택했다.
+// 제곱 중, M의 값보다 r의 값이 더 크다면 나눠준 수로 치환했다.
+// 값을 더하는 중에도 더한 값이 M의 값보다 크다면 이 또한 나눠준 수로 치환한다.
+// M으로 언제 나누는지를 판단하는 것이 핵심인 문제이다.
+
+int main(void)
+{
+	int n;
+	ll ans = 0;
+	string str;
+	cin >> n;
+	cin >> str;
+	for (int i = 0; i < n; i++)
+	{
+		ll temp = str[i] - '0' - 48;
+		ll r = 1;
+		for (int j = 1; j <= i; j++)
+		{
+			r *= 31;
+			if (r > M)
+				r %= M;
+		}
+		ans += temp * r;
+		if (ans > M)
+			ans %= M;
+	}
+	cout << ans;
+}
