@@ -1,0 +1,60 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+typedef long long ll;
+
+// 나무 자르기 : 주어진 배열에서 조건에 맞게 최대값을 찾는 문제
+// 이분탐색을 통해 최대값을 찾아야 한다.
+bool check(int value, vector<int> v, int m)
+{
+	ll sum = 0;
+	ll result;
+	ll tree;
+	for (int i = 0; i < v.size(); i++)
+	{
+		tree = v[i];
+		if (tree >= value)
+		{
+			result = tree - value;
+			sum += result;
+		}
+	}
+	if (sum >= m)
+		return true;
+	else
+		return false;
+}
+int main(void)
+{
+	int n, m;
+	vector<int> vec;
+	cin >> n >> m;
+	int max = 0;
+	for (int i = 0; i < n; i++)
+	{
+		int num;
+		cin >> num;
+		vec.push_back(num);
+		if (num > max)
+		{
+			max = num;
+		}
+	}
+	int low = 0;
+	int high = max;
+	while (low + 1 < high)
+	{
+		int mid = (low + high) / 2;
+		if (check(mid, vec, m))
+		{
+			low = mid;
+		}
+		else
+		{
+			high = mid;
+		}
+	}
+	cout << low;
+}
