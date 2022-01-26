@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+// 마인크래프트 : 땅 평지화를 위해서 들여야 되는 최소 시간과 최대 높이를 구하는 문제
+// 브루트 포스로도 충분히 시간 내에 답이 나오는 문제
+int main(void)
+{
+	// 세로 : N, 가로 : M, 가진 블록 : B
+	int n, m, b;
+	int board[502][502];
+	int ans = 1e9;
+	int max = 0;
+	cin >> n >> m >> b;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			cin >> board[i][j];
+		}
+	}
+	for (int h = 0; h <= 256; h++)
+	{
+		int remove = 0, build = 0;
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+			{
+				int hei = board[i][j] - h;
+				if (hei > 0) remove += hei;
+				else if (hei < 0) build -= hei;
+			}
+		}
+		if (remove + b >= build)
+		{
+			int temp = remove * 2 + build;
+			if (ans >= temp)
+			{
+				ans = temp;
+				max = h;
+			}
+		}
+	}
+	cout << ans << " " << max << "\n";
+}
