@@ -1,0 +1,69 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+// 균형잡힌 세상 : 균형잡힌 문자열 판단 알고리즘을 구현해야 한다.
+// 스택을 통해 별다른 어려움 없이 구현했다.
+// 다만 pop 부분에서 조건이 걸릴 때 스택이 비었는지를 먼저 검사해야 한다.
+
+int main(void)
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+
+	while (true)
+	{
+		string str;
+		getline(cin, str);
+
+		if (str == "." && str.size() == 1)
+			break;
+
+		bool check = false;
+		stack<char> s;
+
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (str[i] == '(' || str[i] == '[')
+				s.push(str[i]);
+			else
+			{
+				if (str[i] == ')')
+				{
+					if (!s.empty() && s.top() == '(')
+					{
+						s.pop();
+					}
+					else
+					{
+						check = true;
+						break;
+					}
+				}
+				else if (str[i] == ']')
+				{
+					if (!s.empty() && s.top() == '[')
+					{
+						s.pop();
+					}
+					else
+					{
+						check = true;
+						break;
+					}
+				}
+			}
+		}
+		if (s.empty() && !check)
+		{
+			cout << "yes" << endl;
+		}
+		else
+		{
+			cout << "no" << endl;
+		}
+		
+	}
+}
