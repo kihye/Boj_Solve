@@ -1,0 +1,44 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+// Z : 분할정복을 사용하여 탐색할 위치 순서 구하기
+// 기존의 재귀로는 시간제한에 걸려버리므로 최대한 시간 단축할 수 있는 방법으로 구현해야 한다.
+
+int n, r, c;
+int result;
+int main(void)
+{
+    cin >> n >> r >> c;
+    int y = pow(2, n) / 2;
+    int x = y;
+    while(n-- > 0)
+    {
+        int temp = pow(2, n) / 2;
+        int skip = pow(4 , n);
+        if(r < y && c < x)
+        {
+            x -= temp;
+            y -= temp;
+        }
+        else if(r < y && x <= c)
+        {
+            x += temp;
+            y -= temp;
+            result += skip;
+        }
+        else if(y <= r && c < x)
+        {
+            x -= temp;
+            y += temp;
+            result += skip * 2;
+        }
+        else
+        {
+            x += temp;
+            y += temp;
+            result += skip * 3;
+        }
+    }
+    cout << result;
+}
