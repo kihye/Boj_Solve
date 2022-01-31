@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+// 바이러스 : 1과 연결된 노드를 탐색하는 문제
+// dfs나 bfs를 통해 탐색하면 연결된 노드가 어렵지 않게 바로 나온다.
+
+int n, m, ans = -1;
+vector<int> v[101];
+bool check[101];
+void dfs(int x)
+{
+    check[x] = true;
+    ans++;
+    for(int i = 0; i < v[x].size(); i++)
+    {
+        int y = v[x][i];
+        if(!check[y])
+            dfs(y);
+    }
+}
+int main(void)
+{
+    cin >> n;
+    cin >> m;
+    for(int i = 0; i < m; i++)
+    {
+        int a, b;
+        cin >> a >> b;
+        v[a].push_back(b);
+        v[b].push_back(a);
+    }
+    for(int i = 1; i <= n; i++)
+    {
+        if(!v[i].empty())
+        {
+            sort(v[i].begin(), v[i].end());
+        }
+    }
+    dfs(1);
+    cout << ans;
+}
