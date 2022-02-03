@@ -1,0 +1,47 @@
+#include<iostream>
+#include<map>
+#include<string>
+#include<cctype>
+using namespace std;
+
+// 나는야 포켓몬 마스터 이다솜 : 데이터의 입력 타입에 맞게 출력을 다르게 하는 문제
+// 맵과 string 배열을 통하여 데이터를 저장한다.
+// isdigit을 사용하여 입력받은 문자열이 int형인지 확인하는게 주요 포인트이다.
+// 확인 후 입력 타입에 맞게 출력해주면 된다.
+// 입출력에 시간초과가 날 수 있으므로 입출력 시간 관리도 해준다.
+
+string names[100001];
+
+int main(void)
+{
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+
+	int n, m;
+	
+	map<string, int> mp;
+
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++)
+	{
+		string str;
+		cin >> str;
+		names[i] = str;
+		mp.insert({str, i});
+	}
+	for (int i = 0; i < m; i++)
+	{
+		string inp;
+		cin >> inp;
+		if (isdigit(inp[0]))
+		{
+			int temp = stoi(inp);
+			cout << names[temp] << '\n';
+		}
+		else
+		{
+			auto it = mp.find(inp);
+			cout << it->second << '\n';
+		}
+	}
+}
