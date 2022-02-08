@@ -1,0 +1,23 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+// 2xn 타일링 2 : 2xn크기의 직사각형을 1x2, 2x1, 2x2로 채우는 방법의 수를 구하는 프로그램 작성
+// 2xn 타일링과 딱히 다른 점은 없는 DP 문제이다.
+// 적당히 수기로 기저사례 파악 후, 테스트케이스를 통하여 올바른 식을 산출하는 방법이 더 빠르게 문제를 풀 수 있다.
+
+int main(void)
+{
+	int n;
+	int dp[1001];
+	cin >> n;
+	dp[1] = 1;
+	dp[2] = 3;
+	dp[3] = 5;
+	for (int i = 4; i <= n; i++)
+	{
+		dp[i] = dp[i - 1] + 2 * dp[i - 2];
+		dp[i] %= 10007;
+	}
+	cout << dp[n];
+}
