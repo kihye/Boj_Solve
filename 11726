@@ -1,0 +1,24 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+// 2xn 타일링 : 2xn크기의 직사각형을 1x2, 2x1로 태우는 방법의 수를 구하는 프로그램 작성
+// 값은 10007로 나눈 나머지를 출력
+// 기저사례가 어디까지인지 파악 후 점화식을 세우면 되는 DP문제
+// 파악 자체는 어렵지 않은 난이도
+
+int main(void)
+{
+	int n;
+	int dp[1001];
+	cin >> n;
+	dp[1] = 1;
+	dp[2] = 2;
+	dp[3] = 3;
+	for (int i = 4; i <= n; i++)
+	{
+		dp[i] = dp[i - 1] + dp[i - 2];
+		dp[i] %= 10007;
+	}
+	cout << dp[n];
+}
