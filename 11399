@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+// ATM : 사람들이 돈을 인출하는데 필요한 시간의 합의 최솟값 출력
+// 가장 최솟값은 오름차순 정렬후 그대로 시간을 더해주는 게 최솟값이 된다.
+// 단순히 최솟값만 필요한다는 의미로, 그리디 알고리즘 유형
+
+int main(void)
+{
+	int n, temp = 0, ans = 0;
+	vector<int> v;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		int num;
+		cin >> num;
+		v.push_back(num);
+	}
+	sort(v.begin(), v.end());
+	for (auto it : v)
+	{
+		temp += it;
+		ans += temp;
+	}
+	cout << ans;
+}
