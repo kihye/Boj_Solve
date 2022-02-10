@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int n, m, ans = 0;
+vector<int> vec[1001];
+bool check[1001];
+
+// 연결 요소의 개수 : 연결되어있는 그래프가 몇개인지 구하는 프로그램 작성
+// 탐색문제로, dfs나 bfs를 사용하면 된다. 여기서는 dfs 사용함.
+
+void dfs(int num)
+{
+	check[num] = true;
+	for (int i = 0; i < vec[num].size(); i++)
+	{
+		int next = vec[num][i];
+		if (!check[next])
+		{
+			dfs(next);
+		}
+	}
+}
+
+int main(void)
+{
+	
+	cin >> n >> m;
+	for (int i = 0; i < m; i++)
+	{
+		int u, v;
+		cin >> u >> v;
+		vec[u].push_back(v);
+		vec[v].push_back(u);
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		if (!vec[i].empty())
+		{
+			sort(vec[i].begin(), vec[i].end());
+		}
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		if (!check[i])
+		{
+			ans++;
+			dfs(i);
+		}
+	}
+	cout << ans;
+}
