@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+// 회의실 배정 : 그리디 알고리즘 문제
+// 기준을 무엇으로 잡을것인가가 가장 중요하다. 이 문제에선 회의가 끝나는 시간이 적절하다.
+// vector의 pair의 값을 반대로 주었는데, sort가 first 요소 기준으로 되기때문에 반대로 값을 넣었다.
+// 끝나는 시간으로 체크, 시작 시간보다 끝나는 시간이 크거나 같을 시 갱신 후 갯수 더해주는 방식이다.
+
+int main(void)
+{
+	int n, ans = 0, times = 0;
+	vector<pair<int, int>> v;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		int n1, n2;
+		cin >> n1 >> n2;
+		v.push_back(make_pair(n2, n1));
+	}
+	sort(v.begin(), v.end());
+	for (auto it : v)
+	{
+		if (times == 0)
+		{
+			times = it.first;
+			ans++;
+		}
+		else
+		{
+			if (times <= it.second)
+			{
+				times = it.first;
+				ans++;
+			}
+		}
+	}
+	cout << ans;
+}
